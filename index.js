@@ -23,18 +23,22 @@ async function sortHackerNewsArticles() {
       const timeString = await subtextRow.locator(".age").getAttribute("title");
 
       const time = new Date(timeString.split(" ")[0]);
+      console.log(time)
       articles.push({ id, time });
-
-      console.log(id, time.toISOString());
     }
+
 
     if (articles.length < 100) {
-      await page.getByRole("link", { name: "More" }).click();
+      await page.locator(".morelink").click();
     }
   }
-
-  console.log("Collected", articles.length, "articles.");
+  // Close the browser
   await browser.close();
+
+  // Check if the articles are sorted by time
+  const isSortedByTime = (arr, key) => arr.every((item, i) => i === 0 || arr[i - 1][key] >= item[key]);
+  console.log("Amount of articles:", articles.length);
+  console.log(`Articles are sorted by time: ${isSortedByTime(articles, "time")}`);
 }
 
 (async () => {

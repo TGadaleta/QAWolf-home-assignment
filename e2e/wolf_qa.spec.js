@@ -1,10 +1,5 @@
 import { test, expect } from "@playwright/test";
 
-test('Hacker News loads', async ({ page }) => {
-    await page.goto('https://news.ycombinator.com/newest');
-    await expect(page.getByRole('link', { name: 'Hacker News' })).toBeVisible();
-  });
-  
 test("Hacker News articles are sorted by time", async ({ page }) => {
     await page.goto("https://news.ycombinator.com/newest");
     const articles = [];

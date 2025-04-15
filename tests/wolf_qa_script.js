@@ -17,7 +17,7 @@
       const timeString = await subtextRow.locator(".age").getAttribute("title");
 
       const time = new Date(timeString.split(" ")[0]);
-      console.log(time)
+      console.log(id, time)
       articles.push({ id, time });
     }
 
